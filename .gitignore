@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/code-java,java-web,java,intellij,eclipse
-# Edit at https://www.toptal.com/developers/gitignore?templates=code-java,java-web,java,intellij,eclipse
+# Created by https://www.toptal.com/developers/gitignore/api/intellij,java,java-web,code-java,maven,eclipse
+# Edit at https://www.toptal.com/developers/gitignore?templates=intellij,java,java-web,code-java,maven,eclipse
 
 ### Code-Java ###
 # Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
@@ -207,4 +207,16 @@ hs_err_pid*
 ## ignoring target file
 target/
 
-# End of https://www.toptal.com/developers/gitignore/api/code-java,java-web,java,intellij,eclipse
+### Maven ###
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# End of https://www.toptal.com/developers/gitignore/api/intellij,java,java-web,code-java,maven,eclipse
