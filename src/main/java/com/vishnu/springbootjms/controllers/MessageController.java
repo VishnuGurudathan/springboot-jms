@@ -3,8 +3,11 @@ package com.vishnu.springbootjms.controllers;
 import com.vishnu.springbootjms.model.QueueMessage;
 import com.vishnu.springbootjms.model.TempStore;
 import com.vishnu.springbootjms.sender.MessageSender;
+import com.vishnu.springbootjms.services.MessageStreamService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,9 +25,11 @@ public class MessageController {
 
     public static final String MESSAGE_QUEUE = "message-queue";
     private final MessageSender messageSender;
+    private final MessageStreamService messageStreamService;
 
-    public MessageController(MessageSender messageSender) {
+    public MessageController(MessageSender messageSender, MessageStreamService messageStreamService) {
         this.messageSender = messageSender;
+        this.messageStreamService = messageStreamService;
     }
 
     @PostMapping
@@ -37,7 +42,13 @@ public class MessageController {
 
     @GetMapping
     public List<QueueMessage> message() {
-        log.debug("stored data : {}", TempStore.tempStore);
-        return TempStore.tempStore;
+        log.debug("stored data : {}", TempStore.messageStore);
+        return TempStore.messageStore;
+    }
+
+    @GetMapping(value = "/streams", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Flux<QueueMessage> messageStream() {
+        /* Send message streams as SSE*/
+        return messageStreamService.messageStreams();
     }
 }

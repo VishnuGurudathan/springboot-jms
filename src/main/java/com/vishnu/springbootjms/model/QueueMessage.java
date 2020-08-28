@@ -1,5 +1,7 @@
 package com.vishnu.springbootjms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +28,7 @@ public class QueueMessage implements Serializable {
     private String message;
     @Builder.Default
     private Date date = new Date();
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer msgCount;
+
 }

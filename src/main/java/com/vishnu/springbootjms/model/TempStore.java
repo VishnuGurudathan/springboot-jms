@@ -2,6 +2,7 @@ package com.vishnu.springbootjms.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Class description
@@ -11,5 +12,5 @@ import java.util.List;
  */
 public class TempStore {
     static final int capacity = 10;
-    public static List<QueueMessage> tempStore = new ArrayList<>(capacity);
+    public static List<QueueMessage> messageStore = new CopyOnWriteArrayList();
 }

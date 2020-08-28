@@ -6,7 +6,6 @@ import com.vishnu.springbootjms.model.QueueMessage;
 import com.vishnu.springbootjms.model.TempStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.MessageHeaders;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -40,6 +37,7 @@ public class MessageListener {
         log.info("received msg : {}", queueMessage);
         // uncomment and view to see retry count in debugger
         // throw new RuntimeException("foo");
+        TempStore.messageStore.add(queueMessage);
 
     }
 
@@ -68,7 +66,7 @@ public class MessageListener {
                         @Headers MessageHeaders headers, Message message){
 
         log.info("received msg : {}", queueMessage);
-        TempStore.tempStore.add(queueMessage);
+        TempStore.messageStore.add(queueMessage);
 
     }
 }
