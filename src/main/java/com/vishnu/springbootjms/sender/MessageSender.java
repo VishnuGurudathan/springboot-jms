@@ -16,6 +16,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class description
@@ -30,11 +31,12 @@ public class MessageSender {
 
     private final JmsTemplate jmsTemplate;
     private final ObjectMapper objectMapper;
+    private AtomicInteger count = new AtomicInteger();
 
     @Value("${activemq.destination}")
     private String destination;
 
-    //@Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 5000)
     private void sendMessage(){
 
 
@@ -42,11 +44,10 @@ public class MessageSender {
                 .builder()
                 .id(UUID.randomUUID())
                 .message("Hello World!")
-
+                .msgCount(count.incrementAndGet())
                 .build();
 
         jmsTemplate.convertAndSend(destination, message);
-
     }
 
     /**
